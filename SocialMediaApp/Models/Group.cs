@@ -13,8 +13,8 @@ namespace SocialMediaApp.Models
 
         // Proprietati de navigatie: 2
 
-        public virtual ICollection<GroupUser> Users { get; set; } = new List<GroupUser>();
-        
-        public virtual ICollection<GroupMessage> Messages { get; set; } = new List<GroupMessage>();
+        public virtual ICollection<GroupUser> Users { get; set; } = [];
+
+        public virtual ICollection<GroupMessage> Messages { get; set; } = [];
     }
 }

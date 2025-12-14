@@ -54,7 +54,7 @@ namespace SocialMediaApp.Models
                         LastName = "Intai",
                         ProfileVisibility = "public",
                         Description = "Default description",
-                        ProfilePicture = "default.png"
+                        ProfilePicture = "/images/Profiles/pfp-admin.png"
                     },
 
                     new ApplicationUser
@@ -70,8 +70,8 @@ namespace SocialMediaApp.Models
                         FirstName = "Userul",
                         LastName = "Intai",
                         ProfileVisibility = "public",
-                        Description = "Default description",
-                        ProfilePicture = "default_u1.png"
+                        Description = "Utilizator cu cont public",
+                        ProfilePicture = "/images/Profiles/pfp-user1.jpg"
                     },
 
                     new ApplicationUser
@@ -87,9 +87,9 @@ namespace SocialMediaApp.Models
 
                         FirstName = "Userul",
                         LastName = "Secund",
-                        ProfileVisibility = "public",
-                        Description = "Default description",
-                        ProfilePicture = "default_u2.png"
+                        ProfileVisibility = "privat",
+                        Description = "Utilizator cu cont privat",
+                        ProfilePicture = "/images/Profiles/pfp-user2.png"
                     }
                 );
 
@@ -116,19 +116,16 @@ namespace SocialMediaApp.Models
                 context.Groups.AddRange(
                     new Group
                     {
-                        Id = 1,
                         Name = "Cinemateca",
                         Description = "Discutii despre filme"
                     },
                     new Group
                     {
-                        Id = 2,
                         Name = "The guitarists",
                         Description = "Tips & tricks pentru urechila muzicale"
                     },
                     new Group
                     {
-                        Id = 3,
                         Name = "Bloc H5 scara 4",
                         Description = "Batraneii veseli din cartier"
                     }
@@ -137,35 +134,30 @@ namespace SocialMediaApp.Models
                 context.Posts.AddRange(
                     new Post
                     {
-                        Id = 1,
                         TextContent = "Salut comunitate!",
                         Date = DateTime.Now,
                         UserId = "00974e5c-2d38-4fc2-8745-e88ceba0d3ba" // admin
                     },
                     new Post
                     {
-                        Id = 2,
                         TextContent = "Cai verzi pe pereti",
                         Date = DateTime.Now,
                         UserId = "45b7d85f-53f2-4f8c-b4eb-ea70f3c2276e" // user1
                     },
                     new Post
                     {
-                        Id = 3,
                         TextContent = "Azi incepe vacanta",
                         Date = DateTime.Now,
                         UserId = "9807aab3-397d-41d4-8efb-13fc06ffee5a" // user2
                     },
                     new Post
                     {
-                        Id = 4,
                         TextContent = "Craciun fericit!",
                         Date = DateTime.Now,
                         UserId = "45b7d85f-53f2-4f8c-b4eb-ea70f3c2276e" // user1
                     },
                     new Post
                     {
-                        Id = 5,
                         TextContent = "Aceasta este o postare",
                         Date = DateTime.Now,
                         UserId = "00974e5c-2d38-4fc2-8745-e88ceba0d3ba" // admin

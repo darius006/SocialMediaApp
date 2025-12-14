@@ -30,13 +30,15 @@ namespace SocialMediaApp.Areas.Identity.Pages.Account
         private readonly IUserEmailStore<ApplicationUser> _emailStore;
         private readonly ILogger<RegisterModel> _logger;
         private readonly IEmailSender _emailSender;
+        private readonly IWebHostEnvironment _webHostEnvironment;
 
         public RegisterModel(
             UserManager<ApplicationUser> userManager,
             IUserStore<ApplicationUser> userStore,
             SignInManager<ApplicationUser> signInManager,
             ILogger<RegisterModel> logger,
-            IEmailSender emailSender)
+            IEmailSender emailSender,
+            IWebHostEnvironment webHostEnvironment)
         {
             _userManager = userManager;
             _userStore = userStore;
@@ -44,6 +46,7 @@ namespace SocialMediaApp.Areas.Identity.Pages.Account
             _signInManager = signInManager;
             _logger = logger;
             _emailSender = emailSender;
+            _webHostEnvironment = webHostEnvironment;
         }
 
         /// <summary>
@@ -75,7 +78,7 @@ namespace SocialMediaApp.Areas.Identity.Pages.Account
             ///     This API supports the ASP.NET Core Identity default UI infrastructure and is not intended to be used
             ///     directly from your code. This API may change or be removed in future releases.
             /// </summary>
-            [Required]
+            [Required(ErrorMessage = "Acest câmp este obligatoriu")]
             [EmailAddress]
             [Display(Name = "Email")]
             public string Email { get; set; }
@@ -84,8 +87,8 @@ namespace SocialMediaApp.Areas.Identity.Pages.Account
             ///     This API supports the ASP.NET Core Identity default UI infrastructure and is not intended to be used
             ///     directly from your code. This API may change or be removed in future releases.
             /// </summary>
-            [Required]
-            [StringLength(100, ErrorMessage = "The {0} must be at least {2} and at max {1} characters long.", MinimumLength = 6)]
+            [Required(ErrorMessage = "Acest câmp este obligatoriu")]
+            [StringLength(100, ErrorMessage = "Parola trebuie să aibă între {2} și {1} caractere.", MinimumLength = 6)]
             [DataType(DataType.Password)]
             [Display(Name = "Password")]
             public string Password { get; set; }
@@ -96,8 +99,34 @@ namespace SocialMediaApp.Areas.Identity.Pages.Account
             /// </summary>
             [DataType(DataType.Password)]
             [Display(Name = "Confirm password")]
-            [Compare("Password", ErrorMessage = "The password and confirmation password do not match.")]
+            [Compare("Password", ErrorMessage = "Parola și parola pentru confirmare nu se potrivesc.")]
             public string ConfirmPassword { get; set; }
+
+            [Required(ErrorMessage = "Acest câmp este obligatoriu")]
+            [RegularExpression("^[-A-Za-z' ]+$",
+                ErrorMessage = "Numele poate conține numai litere, linii, apostroafe și spații.")]
+            [Display(Name = "First name")]
+            public string FirstName { get; set; }
+
+            [Required(ErrorMessage = "Acest câmp este obligatoriu")]
+            [RegularExpression("^[-A-Za-z' ]+$",
+                ErrorMessage = "Numele poate conține numai litere, linii, apostroafe și spații.")]
+            [Display(Name = "Last name")]
+            public string LastName { get; set; }
+
+            [Required(ErrorMessage = "Acest câmp este obligatoriu")]
+            [RegularExpression(@"public|privat",
+                ErrorMessage = "Profilul trebuie să fie public sau privat.")]
+            [Display(Name = "Profile visibility")]
+            public string ProfileVisibility { get; set; }
+
+            [Required(ErrorMessage = "Acest câmp este obligatoriu")]
+            [Display(Name = "Description")]
+            public string Description { get; set; }
+
+            [Required(ErrorMessage = "Acest câmp este obligatoriu")]
+            [Display(Name = "Profile picture")]
+            public IFormFile ProfilePicture { get; set; }
         }
 
 
@@ -113,10 +142,31 @@ namespace SocialMediaApp.Areas.Identity.Pages.Account
             ExternalLogins = (await _signInManager.GetExternalAuthenticationSchemesAsync()).ToList();
             if (ModelState.IsValid)
             {
+                string pfpFileName = null;
+                if (Input.ProfilePicture != null)
+                {
+                    string pfpSavePath = Path.Combine(_webHostEnvironment.WebRootPath, "images", "Profiles");
+
+                    pfpFileName = Guid.NewGuid().ToString() + "_" + Input.ProfilePicture.FileName;
+
+                    string pfpFilePath = Path.Combine(pfpSavePath, pfpFileName);
+
+                    using (var fileStream = new FileStream(pfpFilePath, FileMode.Create))
+                    {
+                        await Input.ProfilePicture.CopyToAsync(fileStream);
+                    }
+                }
                 var user = CreateUser();
 
                 await _userStore.SetUserNameAsync(user, Input.Email, CancellationToken.None);
                 await _emailStore.SetEmailAsync(user, Input.Email, CancellationToken.None);
+
+                user.FirstName = Input.FirstName;
+                user.LastName = Input.LastName;
+                user.Description = Input.Description;
+                user.ProfileVisibility = Input.ProfileVisibility;
+                user.ProfilePicture = Path.Combine("images", "Profiles", pfpFileName);
+                
                 var result = await _userManager.CreateAsync(user, Input.Password);
 
                 if (result.Succeeded)

@@ -7,6 +7,8 @@ namespace SocialMediaApp.Models
         [Key]
         public int Id { get; set; }
         public int? PostId {  get; set; }
+
+        [Required]
         public string ImageUrl { get; set; }
 
         // Proprietati de navigatie: 1

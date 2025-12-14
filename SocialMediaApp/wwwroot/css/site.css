@@ -29,3 +29,116 @@ body {
 .form-floating > .form-control-plaintext:focus::placeholder, .form-floating > .form-control:focus::placeholder {
   text-align: start;
 }
+
+.navbar-brand {
+    font-family: "Edu NSW ACT Cursive", cursive;
+    font-optical-sizing: auto;
+    font-weight: 600;
+    font-style: normal;
+}
+
+.register-brand-name {
+    font-family: "Edu NSW ACT Cursive", cursive;
+    font-optical-sizing: auto;
+    font-weight: 600;
+    font-style: normal;
+}
+
+#registerForm {
+    width: 35%;
+}
+
+.profile-info-container {
+    width: 500px;
+    height: 120px;
+    font-family: Arial;
+    cursor: default;
+    
+}
+
+.pfp-container {
+    width: 120px;
+    height: 120px;
+    overflow: hidden;
+    border-radius: 50%;
+    margin-right: 15px;
+}
+
+.pfp-container img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center;
+}
+
+.user-profile {
+    width: 100%;
+    height: 100%;
+}
+
+.profile-stats {
+    width: 80%;
+}
+
+.profile-info {
+    flex-grow: 1;
+}
+
+.follow-button {
+    width: 500px;
+}
+
+.profile-posts-container {
+    width: 700px;
+}
+
+.profile-post {
+    min-height: 120px;
+    padding: 15px;
+    border: 1px solid #e0e0e0;
+    border-radius: 9px;
+}
+
+.profile-post:hover {
+    background-color: #fafafa;
+}
+
+.profile-post-info {
+    flex-grow: 1;
+}
+
+.post-pfp-container {
+    width: 60px;
+    height: 60px;
+    overflow: hidden;
+    border-radius: 50%;
+    margin-right: 15px;
+}
+
+.post-pfp-container img {
+    width: 100%;
+    height: 100%;
+}
+.profile-post-content {
+    flex-grow: 1;
+}
+
+.profile-post-likes {
+    width: 31px;
+}
+
+.profile-post-likes:hover {
+    color: red;
+}
+
+.post-options {
+    width: 200px;
+}
+
+.post-data {
+    width: 100%;
+}
+
+.post-date {
+    margin-left: auto;
+}

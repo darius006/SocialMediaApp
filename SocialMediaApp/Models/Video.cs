@@ -7,6 +7,7 @@ namespace SocialMediaApp.Models
         [Key]
         public int Id { get; set; }
         public int? PostId { get; set; }
+        [Required]
         public string VideoUrl { get; set; }
 
         // Proprietati de navigatie: 1

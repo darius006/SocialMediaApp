@@ -28,18 +28,18 @@ namespace SocialMediaApp.Models
 
 
         // Proprietati de navigatie: 7
-        public virtual ICollection<Post> Posts { get; set; } = new List<Post>();
-        public virtual ICollection<Comment> Comments { get; set; } = new List<Comment>();
+        public virtual ICollection<Post> Posts { get; set; } = [];
+        public virtual ICollection<Comment> Comments { get; set; } = [];
 
-        public virtual ICollection<Likes> Likes { get; set; } = new List<Likes>();
+        public virtual ICollection<Likes> Likes { get; set; } = [];
 
-        public virtual ICollection<GroupMessage> Messages { get; set; } = new List<GroupMessage>();
+        public virtual ICollection<GroupMessage> Messages { get; set; } = [];
 
-        public virtual ICollection<GroupUser> Groups { get; set; } = new List<GroupUser>();
+        public virtual ICollection<GroupUser> Groups { get; set; } = [];
 
-        public virtual ICollection<Follows> Follows { get; set; } = new List<Follows>();
+        public virtual ICollection<Follows> Follows { get; set; } = [];
 
-        public virtual ICollection<Follows> Followers { get; set; } = new List<Follows>();
+        public virtual ICollection<Follows> Followers { get; set; } = [];
 
         // variabila in care vom retine rolurile existente in baza de date
         // pentru popularea unui dropdown list

@@ -1,0 +1,35 @@
+﻿@model SocialMediaApp.Models.ApplicationUser
+
+@foreach (Post userPost in Model.Posts)
+{
+    <div class="profile-post d-flex flex-row mt-3">
+        <div class="post-pfp-container">
+            <img src="@Model.ProfilePicture" />
+        </div>
+        <div class="profile-post-info d-flex flex-column">
+            <div class="profile-post-username">
+                <b>@Model.FirstName @Model.LastName</b>
+            </div>
+            <div class="profile-post-content d-flex flex-column flex-wrap">
+                @userPost.TextContent
+            </div>
+            <div class="post-data d-flex">
+                <div class="post-options d-flex justify-content-between">
+                    <div class="profile-post-likes d-flex justify-content-between">
+                        <a><i class="bi bi-heart"></i> @userPost.WhoLiked.Count()</a>
+                    </div>
+                    <div class="view-post-detail">
+                        <a asp-controller="Posts"
+                           asp-action="Show"
+                           asp-route-id="@userPost.Id">
+                            <span>Vezi Detalii Postare</span>
+                        </a>
+                    </div>
+                </div>
+                <div class="post-date d-flex">
+                    @userPost.Date
+                </div>
+            </div>
+        </div>
+    </div>
+}

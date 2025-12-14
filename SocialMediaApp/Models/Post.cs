@@ -14,14 +14,14 @@ namespace SocialMediaApp.Models
 
         // Proprietati de navigatie: 5
 
-        public virtual ApplicationUser? User { get; set; }
+        public virtual ApplicationUser User { get; set; }
 
-        public virtual ICollection<Comment> Comments { get; set; } = new List<Comment>();
+        public virtual ICollection<Comment> Comments { get; set; } = [];
 
-        public virtual ICollection<Image> Images { get; set; } = new List<Image>();
+        public virtual ICollection<Image> Images { get; set; } = [];
 
-        public virtual ICollection<Video> Videos { get; set; } = new List<Video>();
+        public virtual ICollection<Video> Videos { get; set; } = [];
 
-        public virtual ICollection<Likes> WhoLiked { get; set; } = new List<Likes>();
+        public virtual ICollection<Likes> WhoLiked { get; set; } = [];
     }
 }

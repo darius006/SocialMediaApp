@@ -40,10 +40,12 @@ namespace SocialMediaApp.Controllers
         }
 
         //afisare user dupa id
-        [Authorize(Roles = "Admin")]
-        public async Task<ActionResult> ShowAsync(string id)
+        public async Task<ActionResult> Show(string id)
         {
-            ApplicationUser? user = db.Users.Find(id);
+            ApplicationUser? user = db.Users
+                .Include(u => u.Posts)
+                .Where(u => u.Id == id)
+                .FirstOrDefault();
 
             if (user is null)
             {
@@ -51,12 +53,6 @@ namespace SocialMediaApp.Controllers
             }
             else
             {
-                var roles = await _userManager.GetRolesAsync(user);
-
-                ViewBag.Roles = roles;
-
-                ViewBag.UserCurent = await _userManager.GetUserAsync(User);
-
                 return View(user);
             }
         }
